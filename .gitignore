@@ -1,0 +1,5 @@
+# Compile class file
+*.class
+
+# VS Code Readme file
+README.md
