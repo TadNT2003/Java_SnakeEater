@@ -1,5 +1,6 @@
 import javax.swing.JFrame;
 
+//Setup the frame for the game
 public class GameFrame extends JFrame {
 
     GameFrame() {
