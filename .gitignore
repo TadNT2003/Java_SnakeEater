@@ -1,5 +1,6 @@
 # Compile class file
 *.class
 
-# VS Code Readme file
+# VS Code non-essential files
 README.md
+launch.json

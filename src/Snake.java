@@ -1,5 +1,6 @@
 // Because only one Snake in the game, so the entire class presents the inctances, hence the static keywords
 public class Snake {
+    // Snake's attributes
     static int x[] = new int[GameProperties.NO_UNITS_TOTAL];
     static int y[] = new int[GameProperties.NO_UNITS_TOTAL];
     static int Body_parts = 6;

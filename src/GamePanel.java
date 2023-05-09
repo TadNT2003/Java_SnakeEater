@@ -3,21 +3,28 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-// Handle the game graphics, draw components
+// Handle the game graphics, draw components, user's control
 public class GamePanel extends JPanel implements ActionListener{
 
     // Game timer
     Timer timer;
+    
 
     // Setup background and size for the game, call StartGame
     GamePanel() {
         this.setPreferredSize(new Dimension(GameProperties.GAME_PANEL_WIDTH, GameProperties.GAME_PANEL_HEIGHT));
         this.setBackground(Color.BLACK);
+        this.setFocusable(true);
+        this.addKeyListener(new MyKeyAdapter());
         StartGame();
     }
 
     // Start game process
     private void StartGame() {
+        // Set initial position of Snake (center)
+        Snake.y[0] = Math.round(GameProperties.NO_UNITS_HEIGHT/2 * GameProperties.UNIT_SIZE);
+
+        // Set game running and game timer
         GameProperties.isRunning = true;
         timer = new Timer(GameProperties.DELAY, this);
         timer.start();
@@ -62,6 +69,27 @@ public class GamePanel extends JPanel implements ActionListener{
         }
         catch (Exception error) {
             throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+        }
+    }
+
+    // Handle user's key control
+    private class MyKeyAdapter extends KeyAdapter{
+        @Override
+        public void keyPressed(KeyEvent e) {
+            switch(e.getKeyCode()) {
+                case KeyEvent.VK_RIGHT:
+                    if (Snake.direction != 'L') Snake.direction = 'R';
+                    break;
+                case KeyEvent.VK_LEFT:
+                    if (Snake.direction != 'R') Snake.direction = 'L';
+                    break;
+                case KeyEvent.VK_UP:
+                    if (Snake.direction != 'D') Snake.direction = 'U';
+                    break;
+                case KeyEvent.VK_DOWN:
+                    if (Snake.direction != 'U') Snake.direction = 'D';
+                    break; 
+            }
         }
     }
     
