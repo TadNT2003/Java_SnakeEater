@@ -3,12 +3,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-// Handle the game graphics, draw components, user's control
+// Handle the game graphics, draw components, user's control and action handler
 public class GamePanel extends JPanel implements ActionListener{
 
     // Game timer
-    Timer timer;
-    
+    Timer timer;  
 
     // Setup background and size for the game, call StartGame
     GamePanel() {
@@ -26,11 +25,13 @@ public class GamePanel extends JPanel implements ActionListener{
 
         // Set game running and game timer
         GameProperties.isRunning = true;
+        Apple.Appear();
         timer = new Timer(GameProperties.DELAY, this);
         timer.start();
     }
 
     // Procedure for painting components on the Panel properly
+    // Inherite from JPanel so public access modifilers
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         draw(g);
@@ -49,8 +50,12 @@ public class GamePanel extends JPanel implements ActionListener{
             g.drawLine(0, j_alignment, GameProperties.GAME_PANEL_WIDTH, j_alignment);
         }
 
+        // Draw the Apple
+        g.setColor(Color.red);
+        g.fillOval(Apple.AppleX, Apple.AppleY, GameProperties.UNIT_SIZE, GameProperties.UNIT_SIZE);
+
         // Draw the Snake's head
-        g.setColor(new Color(45, 180, 0));
+        g.setColor(new Color(90, 180, 50));
         g.fillRect(Snake.x[0], Snake.y[0], GameProperties.UNIT_SIZE, GameProperties.UNIT_SIZE);
         // Draw the Snake's body
         for (int i = 1; i < Snake.Body_parts; i++) {
@@ -64,6 +69,8 @@ public class GamePanel extends JPanel implements ActionListener{
         try{
             if (GameProperties.isRunning) {
                 Snake.move();
+                Snake.CheckCollision();
+                Apple.AppleEaten();
             }
             repaint();
         }

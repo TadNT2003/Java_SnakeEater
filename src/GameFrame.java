@@ -1,7 +1,7 @@
 import javax.swing.JFrame;
 
-//Setup the frame for the game
-public class GameFrame extends JFrame {
+//Setup the frame for the game, use default access
+class GameFrame extends JFrame {
 
     GameFrame() {
         this.add(new GamePanel());
