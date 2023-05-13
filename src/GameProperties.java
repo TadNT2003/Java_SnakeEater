@@ -8,6 +8,8 @@ class GameProperties {
     static final int NO_UNITS_HEIGHT = GAME_PANEL_HEIGHT/UNIT_SIZE;
     static final int NO_UNITS_TOTAL = NO_UNITS_WIDTH*NO_UNITS_HEIGHT;
     static final int DELAY = 100;
+    static final int BUTTON_WIDTH = 200;
+    static final int BUTTON_HEIGHT = 90;
 
     // Game dynamic attributes
     static boolean isRunning = false;

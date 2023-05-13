@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-// Handle the game graphics, draw components, user's control and action handler
+// Handle running the game, user's control and action handler
 public class GamePanel extends JPanel implements ActionListener{
 
     // Game timer
@@ -15,11 +15,11 @@ public class GamePanel extends JPanel implements ActionListener{
         this.setBackground(Color.BLACK);
         this.setFocusable(true);
         this.addKeyListener(new MyKeyAdapter());
-        StartGame();
+        //StartGame();
     }
 
     // Start game process
-    private void StartGame() {
+    void StartGame() {
         // Set initial position of Snake (center)
         Snake.y[0] = Math.round(GameProperties.NO_UNITS_HEIGHT/2 * GameProperties.UNIT_SIZE);
 
@@ -55,11 +55,11 @@ public class GamePanel extends JPanel implements ActionListener{
         g.fillOval(Apple.AppleX, Apple.AppleY, GameProperties.UNIT_SIZE, GameProperties.UNIT_SIZE);
 
         // Draw the Snake's head
-        g.setColor(new Color(90, 180, 50));
+        g.setColor(Color.green);
         g.fillRect(Snake.x[0], Snake.y[0], GameProperties.UNIT_SIZE, GameProperties.UNIT_SIZE);
         // Draw the Snake's body
         for (int i = 1; i < Snake.Body_parts; i++) {
-            g.setColor(Color.green);
+            g.setColor(new Color(90, 180, 50));
             g.fillRect(Snake.x[i], Snake.y[i], GameProperties.UNIT_SIZE, GameProperties.UNIT_SIZE);
         }
     }
