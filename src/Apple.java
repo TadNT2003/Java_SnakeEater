@@ -8,13 +8,14 @@ class Apple {
 
     static void Appear() {
         if (random == null) random = new Random();
-        AppleX = random.nextInt(GameProperties.NO_UNITS_WIDTH + 1) * GameProperties.UNIT_SIZE;
-        AppleY = random.nextInt(GameProperties.NO_UNITS_HEIGHT + 1) * GameProperties.UNIT_SIZE;
+        AppleX = random.nextInt(GameProperties.NO_UNITS_WIDTH) * GameProperties.UNIT_SIZE;
+        AppleY = random.nextInt(GameProperties.NO_UNITS_HEIGHT) * GameProperties.UNIT_SIZE;
     }
 
     static void AppleEaten() {
         if ((Snake.x[0] == AppleX) && (Snake.y[0] == AppleY)) {
             Snake.Body_parts += 2;
+            
             Appear();
         }
     }
