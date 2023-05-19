@@ -1,4 +1,5 @@
 import java.awt.CardLayout;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,13 +13,15 @@ class GameFrame extends JFrame implements ActionListener{
 
     StartMenu start_menu;
     ScoreBar game_screen;
+    GameOver game_over;
 
     PauseMenu pause_menu;
 
     // Game timer
     Timer timer;
 
-    static CardLayout card;
+    CardLayout card;
+    Container c;
 
     GameFrame() {
         // Set timer
@@ -31,6 +34,13 @@ class GameFrame extends JFrame implements ActionListener{
 
         // Setup game screen
         game_screen = new ScoreBar();
+        game_screen.pause_button.addActionListener(this);
+
+        // Setup game over panel
+        game_over = new GameOver();
+        game_over.try_again.addActionListener(this);
+        game_over.menu_button.addActionListener(this);
+        game_over.quit_button.addActionListener(this);
 
         // Setup card layout
         card = new CardLayout();
@@ -44,6 +54,8 @@ class GameFrame extends JFrame implements ActionListener{
         // Add to card layout
         this.add("a", start_menu);
         this.add("b", game_screen);
+        this.add("c", game_over);
+        c = this.getContentPane();
         
         // Setup frame
         this.setTitle("Snake Eater in Java");
@@ -105,6 +117,11 @@ class GameFrame extends JFrame implements ActionListener{
                     timer.stop();
                     pause_menu.setVisible(true);
                 }
+                if (GameProperties.isCollision) { // When game over
+                    GameProperties.isRunning = false;
+                    timer.stop();
+                    card.show(c, "c");
+                }
                 if (GameProperties.isEaten) { // When the apple is eaten
                     game_screen.score += 1000;
                     game_screen.score_text.setText(" Score: "+game_screen.score);
@@ -122,19 +139,26 @@ class GameFrame extends JFrame implements ActionListener{
     // Action perform when click button
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == start_menu.start_button) {
-            card.show(this.getContentPane(), "b");
+        if ((e.getSource() == start_menu.start_button) || (e.getSource() == game_over.try_again)) { // Click start/try again button
+            GameProperties.isCollision = false;
+            card.show(c, "b");
             StartGame();
         }
-        else if (e.getSource() == start_menu.quit_button) {
+        else if ((e.getSource() == start_menu.quit_button) || (e.getSource() == game_over.quit_button)) { // Click quit button
+            pause_menu.dispose();
             this.dispose();
         }
-        else if (e.getSource() == pause_menu.menu_button) {
-            pause_menu.setVisible(false);
-            card.show(this.getContentPane(), "a");
+        else if (e.getSource() == game_screen.pause_button) { // Click pause button
+            game_screen.pause_button.setEnabled(false);
+            GameProperties.isRunning = false;
         }
-        else if (e.getSource() == pause_menu.continue_button) {
+        else if ((e.getSource() == pause_menu.menu_button) || (e.getSource() == game_over.menu_button)) { // Click menu button
             pause_menu.setVisible(false);
+            card.show(c, "a");
+        }
+        else if (e.getSource() == pause_menu.continue_button) { // Click continue button
+            pause_menu.setVisible(false);
+
             timer.start();
             GameProperties.isRunning = true;
             game_screen.pause_button.setEnabled(true);

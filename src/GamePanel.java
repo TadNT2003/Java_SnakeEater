@@ -38,17 +38,6 @@ class GamePanel extends JPanel{
 
     // Draw all the components (aka Snake, Apple, grid,...) onto the Panel
     private void draw(Graphics g) {
-        // Draw grid along height
-        for (int i = 0; i < GameProperties.NO_UNITS_WIDTH; i++){
-            int i_alignment = i * GameProperties.UNIT_SIZE;
-            g.drawLine(i_alignment, 0, i_alignment, GameProperties.GAME_PANEL_HEIGHT);
-        }
-        // Draw grid along width
-        for (int j = 0; j < GameProperties.NO_UNITS_HEIGHT; j++) {
-            int j_alignment = j * GameProperties.UNIT_SIZE;
-            g.drawLine(0, j_alignment, GameProperties.GAME_PANEL_WIDTH, j_alignment);
-        }
-
         // Draw the Apple
         g.setColor(Color.red);
         g.fillOval(Apple.AppleX, Apple.AppleY, GameProperties.UNIT_SIZE, GameProperties.UNIT_SIZE);

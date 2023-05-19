@@ -21,4 +21,5 @@ class GameProperties {
     // Game dynamic attributes
     static boolean isRunning = false;
     static boolean isEaten = false;
+    static boolean isCollision = false;
 }

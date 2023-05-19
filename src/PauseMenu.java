@@ -20,11 +20,13 @@ class PauseMenu extends JFrame{
         menu_button = new JButton("Menu");
         menu_button.setPreferredSize(new Dimension(200, 100));
         menu_button.setBounds(100, 75, 200, 100);
+        menu_button.setFocusable(false);
         
         // Setup continue button
         continue_button = new JButton("Continue");
         continue_button.setPreferredSize(new Dimension(100, 50));
         continue_button.setBounds(100, 200, 200, 100);
+        continue_button.setFocusable(false);
 
         this.add(menu_button);
         this.add(continue_button);

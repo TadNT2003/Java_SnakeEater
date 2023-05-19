@@ -37,5 +37,12 @@ class Snake {
         else if (x[0] >= GameProperties.GAME_PANEL_WIDTH) x[0] = 0;
         if (y[0] < 0) y[0] = GameProperties.GAME_PANEL_HEIGHT - GameProperties.UNIT_SIZE;
         else if (y[0] >= GameProperties.GAME_PANEL_HEIGHT) y[0] = 0;
+
+        for (int i = 1; i < Body_parts; i++) {
+            if ((x[i] == x[0]) && (y[i] == y[0])) {
+                GameProperties.isCollision = true;
+                break;
+            }
+        }
     }
 }

@@ -2,8 +2,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -15,7 +13,6 @@ class ScoreBar extends JPanel{
     JPanel score_panel;
     JButton pause_button;
     JTextArea score_text;
-    PauseAction pause_game;
 
     // Game panel
     GamePanel game_panel;
@@ -38,10 +35,6 @@ class ScoreBar extends JPanel{
         pause_button.setPreferredSize(new Dimension(GameProperties.SCORE_BAR_COMPONENTS_HEIGHT, GameProperties.PAUSE_BUTTON_WIDTH));
         pause_button.setBounds(GameProperties.COMPONENTS_SPACING_FROM_BORDER, GameProperties.COMPONENTS_SPACING_FROM_BORDER
             , GameProperties.PAUSE_BUTTON_WIDTH, GameProperties.SCORE_BAR_COMPONENTS_HEIGHT);
-
-        // Pause action
-        pause_game = new PauseAction();
-        pause_button.addActionListener(pause_game);
         score_panel.add(pause_button);
 
         // Score text
@@ -58,16 +51,6 @@ class ScoreBar extends JPanel{
         this.setPreferredSize(new Dimension(GameProperties.GAME_PANEL_WIDTH, GameProperties.GAME_PANEL_HEIGHT + GameProperties.SCORE_BAR_HEIGHT));
         this.add(score_panel, BorderLayout.NORTH);
         this.add(game_panel, BorderLayout.SOUTH);
-    }
-
-    // For pausing the game
-    class PauseAction implements ActionListener{
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            pause_button.setEnabled(false);
-            GameProperties.isRunning = false;
-        }
     }
 
 }
