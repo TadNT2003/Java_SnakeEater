@@ -9,13 +9,16 @@ class GameProperties {
     static final int BUTTON_WIDTH = 200;
     static final int BUTTON_HEIGHT = 90;
     static final int SCORE_BAR_HEIGHT = 50;
+    static final int PAUSE_BUTTON_WIDTH = 80;
+    static final int SCORE_FIELD_WIDTH = 200;
 
     static final int NO_UNITS_WIDTH = GAME_PANEL_WIDTH/UNIT_SIZE;
     static final int NO_UNITS_HEIGHT = GAME_PANEL_HEIGHT/UNIT_SIZE;
     static final int NO_UNITS_TOTAL = NO_UNITS_WIDTH*NO_UNITS_HEIGHT;
-    static final int PAUSE_BUTTON_SIZE = SCORE_BAR_HEIGHT*4/5;
+    static final int SCORE_BAR_COMPONENTS_HEIGHT = SCORE_BAR_HEIGHT*3/5;
+    static final int COMPONENTS_SPACING_FROM_BORDER = (SCORE_BAR_HEIGHT - SCORE_BAR_COMPONENTS_HEIGHT)/2;
 
     // Game dynamic attributes
     static boolean isRunning = false;
-    static Integer score = 0;
+    static boolean isEaten = false;
 }

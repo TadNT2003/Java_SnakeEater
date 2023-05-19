@@ -1,13 +1,15 @@
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
 
-import java.awt.*;
-import java.awt.event.*;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JPanel;
 
 // Handle running the game, user's control and action handler
-public class GamePanel extends JPanel implements ActionListener{
-
-    // Game timer
-    Timer timer; 
+class GamePanel extends JPanel{
+ 
     
     // Setup key binding
     Action up_action;
@@ -15,7 +17,7 @@ public class GamePanel extends JPanel implements ActionListener{
     Action right_action;
     Action left_action;
 
-    // Setup background and size for the game, call StartGame
+    // Setup background and size for the game, initialize action for key binding
     GamePanel() {
         this.setPreferredSize(new Dimension(GameProperties.GAME_PANEL_WIDTH, GameProperties.GAME_PANEL_HEIGHT));
         this.setBackground(Color.BLACK);
@@ -25,34 +27,6 @@ public class GamePanel extends JPanel implements ActionListener{
         down_action = new DownAction();
         right_action = new RightAction();
         left_action = new LeftAction();
-
-        // Initialize all elements of x, y to -1
-    }
-
-    // Start game process
-    void StartGame() {
-        // Set initial position of Snake (center)
-        Snake.y[0] = Math.round(GameProperties.NO_UNITS_HEIGHT/2 * GameProperties.UNIT_SIZE);
-
-        // Set input-action map
-        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("UP"), "up_action");
-        this.getActionMap().put("up_action", up_action);
-
-        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DOWN"), "down_action");
-        this.getActionMap().put("down_action", down_action);
-
-        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"), "right_action");
-        this.getActionMap().put("right_action", right_action);
-
-        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"), "left_action");
-        this.getActionMap().put("left_action", left_action);
-
-        // Set game running and game timer
-        GameProperties.isRunning = true;
-        Apple.Appear();
-        timer = new Timer(GameProperties.DELAY, this);
-        timer.start();
-
     }
 
     // Procedure for painting components on the Panel properly
@@ -89,29 +63,12 @@ public class GamePanel extends JPanel implements ActionListener{
         }
     }
 
-    // Action for timer to perform
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        try{
-            if (GameProperties.isRunning) {
-                Snake.move();
-                Snake.CheckCollision();
-                Apple.AppleEaten();
-            }
-            repaint();
-        }
-        catch (Exception error) {
-            throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
-        }
-    }
-
     // Handle user's key control
     class UpAction extends AbstractAction{
 
         @Override
         public void actionPerformed(ActionEvent e) {
             if (Snake.direction != 'D') Snake.direction = 'U';
-            //throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
         }
 
     }
@@ -120,7 +77,6 @@ public class GamePanel extends JPanel implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
             if (Snake.direction != 'U') Snake.direction = 'D';
-            //throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
         }
         
     }
@@ -129,7 +85,6 @@ public class GamePanel extends JPanel implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
             if (Snake.direction != 'L') Snake.direction = 'R';
-            //throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
         }
         
     }
@@ -138,7 +93,6 @@ public class GamePanel extends JPanel implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
             if (Snake.direction != 'R') Snake.direction = 'L';
-            //throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
         }
         
     }

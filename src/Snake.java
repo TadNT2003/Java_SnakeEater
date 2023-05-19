@@ -4,8 +4,8 @@ class Snake {
     // Snake's attributes
     static int x[] = new int[GameProperties.NO_UNITS_TOTAL];
     static int y[] = new int[GameProperties.NO_UNITS_TOTAL];
-    static int Body_parts = 6;
-    static char direction = 'R';
+    static int Body_parts;
+    static char direction;
 
     // Actraction the move of the Snake
     static void move() {
@@ -29,7 +29,6 @@ class Snake {
                 y[0] += GameProperties.UNIT_SIZE;
                 break;
         }
-
     }
 
     // Check wall and body collision

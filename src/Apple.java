@@ -15,7 +15,7 @@ class Apple {
     static void AppleEaten() {
         if ((Snake.x[0] == AppleX) && (Snake.y[0] == AppleY)) {
             Snake.Body_parts += 2;
-            
+            GameProperties.isEaten = true;
             Appear();
         }
     }
